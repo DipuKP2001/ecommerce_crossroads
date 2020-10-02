@@ -3,10 +3,11 @@
         <div class="row">
             {{#each products}}
                 <div class="col-md-3">
-                    <div class="card" style="width: 18rem;">
-                        <img style="width: 250px; height:280px;" src={{this.image}} class="card-img-top" alt="...">
+                    <div class="card m-2" style="width: 16rem;">
+                        <img style="width: 250px; height:280px;" src="product-images/{{this._id}}.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{this.title}}</h5>
+                            <h3>{{this.price}}</h3>
                             <p class="card-text">{{this.description}}</p>
                             <a href="#" class="btn btn-primary">Add to Cart</a>
                         </div>
