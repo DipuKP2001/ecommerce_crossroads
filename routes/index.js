@@ -16,7 +16,8 @@ router.get('/login',(req,res)=>{
   if(req.session.loggedIn){
     res.redirect('/')
   }else{
-    res.render('user/login')
+    res.render('user/login',{"loginErr":req.session.loginErr})
+    req.session.loginErr=false
   }
 });
 
@@ -36,7 +37,8 @@ router.post('/login',(req,res)=>{
       req.session.loggedIn = true
       req.session.user = response.user 
       res.redirect('/')
-    }else{ 
+    }else{
+      req.session.loginErr = "invalid username or password" 
       res.redirect('/login')
     }
   })
@@ -45,6 +47,10 @@ router.post('/login',(req,res)=>{
 router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.redirect('/')
+})
+
+router.get('/cart',(req,res)=>{
+  res.render('user/cart')
 })
 
 module.exports = router;
