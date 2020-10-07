@@ -2,6 +2,13 @@ var express = require('express');
 const productHelpers = require('../helpers/product-helpers');
 const userHelpers = require('../helpers/user-helpers');
 var router = express.Router();
+const verifylogin = (req,res,next)=>{
+  if(req.session.loggedIn){
+    next()
+  }else{
+    res.redirect('/login')
+  }
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -49,7 +56,7 @@ router.get('/logout',(req,res)=>{
   res.redirect('/')
 })
 
-router.get('/cart',(req,res)=>{
+router.get('/cart',verifylogin,(req,res)=>{
   res.render('user/cart')
 })
 

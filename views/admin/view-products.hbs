@@ -21,6 +21,10 @@
                 <td>{{this.price}}</td>
                 <td>{{this.description}}</td>
                 <td><img src="product-images/{{this._id}}.jpg" style="width: 100px; height:100px;"></td>
+                <td>
+                    <a href="admin/edit/{{this._id}}" class="btn btn-primary">Edit</a>
+                    <a href="admin/delete/{{this._id}}" class="btn btn-danger" onclick="return confirm('Do you want to still delete {{this.title}}')">Delete</a>
+                </td>
                 </tr>
             </tbody>
             {{/each}}
