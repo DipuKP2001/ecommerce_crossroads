@@ -11,11 +11,17 @@
                     <label for="description" class="form-label">Description</label>
                     <input type="text" name="description" class="form-control" id="description" value="{{product.description}}">    
                     <label for="image" class="form-label">Image</label>
-                    <img src="/product-images/{{product._id}}.jpg" alt="" style="height: 150px;padding:1rem;">
-                    <input type="file" name="image" class="form-control" id="image">    
+                    <img src="/product-images/{{product._id}}.jpg" id="productImg" style="height: 150px;padding:1rem;">
+                    <input type="file" name="image" class="form-control" onchange="changeImg(event)">    
                     <button type="submit" class="btn btn-success mt-4">Edit</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    function changeImg(event){
+        document.getElementById('productImg').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>

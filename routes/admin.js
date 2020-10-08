@@ -47,7 +47,7 @@ router.post('/edit-product/:id',(req,res)=>{
     if(image){
       image.mv('./public/product-images/'+req.params.id+'.jpg')
     }
-  })
+  }) 
 })
 
 module.exports = router;
