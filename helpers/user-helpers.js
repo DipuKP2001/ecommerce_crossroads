@@ -140,13 +140,24 @@ module.exports = {
     changeProductQuantity:(details)=>{
         details.count = parseInt(details.count)
         return new Promise((resolve,reject)=>{
-            db.get().collection(collection.CART_COLLECTION)
-            .updateOne({_id:objectId(details.cart),'products.item':objectId(details.product)},
+            if(details.quantity==1 && details.count==-1){
+                db.get().collection(collection.CART_COLLECTION)
+                .updateOne({_id:objectId(details.cart)},
+                {
+                    $pull:{products:{item:objectId(details.product)}}
+                }
+                ).then((response)=>{
+                    resolve({removeProduct:true})
+                })
+            }else{
+                db.get().collection(collection.CART_COLLECTION)
+                .updateOne({_id:objectId(details.cart),'products.item':objectId(details.product)},
                 {
                     $inc:{'products.$.quantity':details.count}
-                }).then(()=>{
-                    resolve()
-                })
+                }).then((response)=>{
+                    resolve(true)
+                }) 
+            }
         })
     }
 }
